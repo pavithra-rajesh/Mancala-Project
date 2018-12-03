@@ -91,33 +91,40 @@ public class MancalaGame implements IStrategyGame{
 				}
 				successivePit++;
 			}
+			//End of Move, determine the next player
+			playerTurnChange();
 			
-			//At the end of every move, check if last stone is in Mancala of active player. Then player gets another turn else turn changes.
-			if(!isLastStoneInMancala) {
-				if(playerA) {
-					playerA = false;
-					//FIXME: Send a message to UI indicating that it is playerB's turn
-				}
-				else {
-					playerA = true;
-					//FIXME: Send a message to UI indicating that it is playerA's turn
-				}
-			}	
-			else
-			{
-				if(playerA) {
-					//FIXME: Send a message to UI indicating that the playerA gets a free turn
-				}
-				else {
-					//FIXME: Send a message to UI indicating that the playerB gets a free turn
-				}
-				
-			}
 		}
 		else {
 			//FIXME: Message to UI stating that the move is invalid
 		}
 		
+	}
+	
+	/* At the end of every move, 
+	 * - Check if last stone is in Mancala of active player. 
+	 * - Then player gets another turn else turn changes.
+	 */
+	public void playerTurnChange() {
+		if(!isLastStoneInMancala) {
+			if(playerA) {
+				playerA = false;
+				//FIXME: Send a message to UI indicating that it is playerB's turn
+			}
+			else {
+				playerA = true;
+				//FIXME: Send a message to UI indicating that it is playerA's turn
+			}
+		}	
+		else
+		{
+			if(playerA) {
+				//FIXME: Send a message to UI indicating that the playerA gets a free turn
+			}
+			else {
+				//FIXME: Send a message to UI indicating that the playerB gets a free turn
+			}
+		}	
 	}
 	
 	/**
