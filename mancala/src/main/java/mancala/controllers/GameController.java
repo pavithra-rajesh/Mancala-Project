@@ -21,6 +21,6 @@ public class GameController {
 	
 	@RequestMapping(method = RequestMethod.POST, value = "3")
 	public void performMove(@RequestBody int pitClicked) {
-		//mancalaGame.performMove(pitClicked);
+		mancalaGame.performMove(pitClicked);
 	}
 }

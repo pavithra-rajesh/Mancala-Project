@@ -11,12 +11,12 @@ package mancala.services;
 public interface IStrategyGame {
 
 	//Perform move once a pit is clicked
-	public void PerformMove(int chosenPit);
+	public void performMove(int chosenPit);
 	
 	//Declare the winner
-	public void DeclareWinner();
+	public void declareWinner();
 	
 	//Check if Game is over
-	public void GameOver();
+	public void gameOver();
 	
 }
