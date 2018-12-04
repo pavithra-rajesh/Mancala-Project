@@ -14,6 +14,8 @@ public class MancalaGame implements IStrategyGame{
 	private boolean isLastStoneInMancala;
 	private LinkedList<BoardPit> boardPits;
 	private final int NUM_STONES_IN_PIT = 6;
+	private String winnerString;
+	private boolean isGameOver;
 	
 	/* 
 	 * @see mancala.services.IStrategyGame#PerformMove(int)
@@ -185,20 +187,81 @@ public class MancalaGame implements IStrategyGame{
 	}
 	/* 
 	 * @see mancala.services.IStrategyGame#DeclareWinner()
+	 * Player with greater number of stones in his Mancala is the winner.
+	 * If equal, then it is a tie.
 	 */
 	@Override
 	public void declareWinner() {
-		
+		if(boardPits.get(6).getCountOfStones() > boardPits.get(13).getCountOfStones())
+			winnerString = "Player A is the winner";
+		else if (boardPits.get(13).getCountOfStones() > boardPits.get(6).getCountOfStones())
+			winnerString = "Player B is the winner";
+		else 
+			winnerString = "It is a tie!";
+		//FIXME: Message the winner string to UI
 	}
 
 	/* 
 	 * @see mancala.services.IStrategyGame#GameOver()
+	 * Game is over if either top row or bottom row is empty.
+	 * Then transfer the remaining stones to the corresponding player's Mancala.
 	 */
 	@Override
 	public void gameOver() {
-		
+		isGameOver = (isTopRowEmpty() || isBottomRowEmpty()) ? transferLeftOversToMancala() : false;
 	}
 	
+	/**
+	 * Check if the top row is empty.
+	 * @return boolean - true if top row is empty.
+	 */
+	public boolean isTopRowEmpty() {
+		boolean isEmpty = true;
+		for(int i = 0; i < 6 ; i++){
+			if(!boardPits.get(i).isEmpty()) {
+				isEmpty = false;
+				break;
+			}
+		}
+		return isEmpty;
+	}
+	
+	/**
+	 * Check if the bottom row is empty.
+	 * @return boolean - true if top row is empty.
+	 */
+	public boolean isBottomRowEmpty() {
+		boolean isEmpty = true;
+		for(int i = 7; i < 13 ; i++){
+			if(!boardPits.get(i).isEmpty()) {
+				isEmpty = false;
+				break;
+			}
+		}
+		return isEmpty;
+	}
+	
+	/**
+	 * @return boolean - always true as at least one of the rows is empty at this point.
+	 */
+	public boolean transferLeftOversToMancala() {
+		int countLeftOverStones = 0;
+		if(isTopRowEmpty()) {
+			for (int i = 7 ; i < 13 ; i++) {
+				countLeftOverStones += boardPits.get(i).getCountOfStones();
+				boardPits.get(i).emptyPit();
+			}
+			boardPits.get(13).addStones(countLeftOverStones);
+		}
+		else if (isBottomRowEmpty()) {
+			for (int i = 0 ; i < 6 ; i++) {
+				countLeftOverStones += boardPits.get(i).getCountOfStones();
+				boardPits.get(i).emptyPit();
+			}
+		}
+		boardPits.get(6).addStones(countLeftOverStones);
+		return true;
+	}
 	
 	/**
 	 * @param landedEmptyPit

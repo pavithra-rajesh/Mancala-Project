@@ -68,7 +68,7 @@ public class BoardPit {
 	public int getCountOfStones() {
 		return countStonesInPit;
 	}
-	
+
 	/**
 	 * @return a boolean - true if the stack of stones is empty or size is zero.
 	 */
@@ -82,6 +82,13 @@ public class BoardPit {
 	public void emptyPit() {
 		stones.clear();
 		countStonesInPit = 0;
+	}
+	
+	public void addStones(int numStones) {
+		for(int i = 0; i < numStones; i++) {
+			stones.push(new Stone());
+			countStonesInPit++;
+		}
 	}
 
 }
