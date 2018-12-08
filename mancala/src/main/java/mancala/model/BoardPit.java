@@ -1,4 +1,4 @@
-package mancala.models;
+package mancala.model;
 
 import java.util.Stack;
 
@@ -11,7 +11,7 @@ public class BoardPit {
 	
 	private Stack<Stone> stones;
 	private int countStonesInPit;
-	private boolean IsPitMancala;
+	public boolean IsPitMancala;
 	
 	
 	/**
@@ -84,6 +84,10 @@ public class BoardPit {
 		countStonesInPit = 0;
 	}
 	
+	/**
+	 * Add stones to the pit.
+	 * @param numStones - the number of stones to be added to pit.
+	 */
 	public void addStones(int numStones) {
 		for(int i = 0; i < numStones; i++) {
 			stones.push(new Stone());
@@ -91,4 +95,10 @@ public class BoardPit {
 		}
 	}
 
+	/**
+	 * To set a pit as Mancala after the game board is laid.
+	 */
+	public void setPitAsMancala() {
+		IsPitMancala = true;
+	}
 }

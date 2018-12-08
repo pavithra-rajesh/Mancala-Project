@@ -1,8 +1,11 @@
-package mancala.services;
+package mancala.service;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
-import mancala.models.BoardPit;
+import mancala.model.BoardPit;
+import transferObject.GameBoard;
 
 /**
  * @author "Pavithra"
@@ -15,29 +18,26 @@ public class MancalaGame implements IStrategyGame{
 	private LinkedList<BoardPit> boardPits;
 	private final int NUM_STONES_IN_PIT = 6;
 	private String winnerString;
-	private boolean isGameOver;
+	private boolean gameOver;
 	
 	/* 
 	 * @see mancala.services.IStrategyGame#PerformMove(int)
 	 * Perform move when a pit is clicked
-	 * Validate the chosen pit - If valid, then loop through the pits and push a stone in to each.
+	 * Validate the selected pit - If valid, then loop through the pits and push a stone in to each.
 	 * While looping through pits:
 	 *  Reset isLastStoneInMancala to false
 	 *  1. check if next pit is Mancala - Add stone if it is Mancala of the current player else do nothing.
 	 *  								- Also check if that is the last stone in the chosenPit, then set IsLastStoneInMancala to true.
 	 *  2. Capture logic - Check if the stone is 'last stone in current pit', 'next pit is empty' on the 'current player's side' and has 'non-empty opposite pit'
 	 *  3. If none of the above two cases, then simply push a stone in to the next pit 
-	 * @param chosenPit - the index of the chosenPit from the linked list.
+	 * @param selectedPit - the index of the selectedPit from the linked list.
 	 * @return
-	 */
-	/* (non-Javadoc)
-	 * @see mancala.services.IStrategyGame#performMove(int)
 	 */
 	@Override
 	public void performMove(int selectedPit) {
 		
 		//Validate the selected pit before performing the move.
-		if(validateChosenPit(selectedPit)) {
+		if(validateSelectedPit(selectedPit)) {
 			isLastStoneInMancala = false;
 			int successivePit = selectedPit + 1;
 			int stonesInSelectedPit = boardPits.get(selectedPit).getCountOfStones();
@@ -158,7 +158,8 @@ public class MancalaGame implements IStrategyGame{
 
 	 * @return a boolean - true if the selectedPit is valid and move can proceed.
 	 */
-	public boolean validateChosenPit(int selectedPit) {
+	@Override
+	public boolean validateSelectedPit(int selectedPit) {
 		boolean isValid = true;
 		//Check if pit is empty
 		if(boardPits.get(selectedPit).isEmpty())
@@ -207,8 +208,9 @@ public class MancalaGame implements IStrategyGame{
 	 * Then transfer the remaining stones to the corresponding player's Mancala.
 	 */
 	@Override
-	public void gameOver() {
-		isGameOver = (isTopRowEmpty() || isBottomRowEmpty()) ? transferLeftOversToMancala() : false;
+	public boolean isGameOver() {
+		gameOver = (isTopRowEmpty() || isBottomRowEmpty()) ? transferLeftOversToMancala() : false;
+		return gameOver;
 	}
 	
 	/**
@@ -256,7 +258,7 @@ public class MancalaGame implements IStrategyGame{
 		else if (isBottomRowEmpty()) {
 			for (int i = 0 ; i < 6 ; i++) {
 				countLeftOverStones += boardPits.get(i).getCountOfStones();
-				boardPits.get(i).emptyPit();
+				boardPits.get(i).emptyPit();  
 			}
 		}
 		boardPits.get(6).addStones(countLeftOverStones);
@@ -271,4 +273,47 @@ public class MancalaGame implements IStrategyGame{
 		BoardPit pairedPit = boardPits.get(12 - landedEmptyPit);
 		return pairedPit;
 	}
+
+	/* 
+	 * @see mancala.services.IStrategyGame#startNewGame()
+	 * Create a new game with 6 stones in each pit and two empty mancalas
+	 * Set the player boolean to playerA 
+	 * Set the game status as game not over
+	 * Empty winner string
+	 */
+	@Override
+	public void startNewGame() {
+		
+		boardPits = new LinkedList<BoardPit>();
+		boolean isMancala = false;
+		for(int i = 0; i < 14 ; i++) {
+			if( i != 6)
+				isMancala = true;
+			else if (i != 13)
+				isMancala = true;
+			// To keep the Mancalas empty
+			if (!isMancala)
+				boardPits.add(new BoardPit(NUM_STONES_IN_PIT));
+		}
+		boardPits.get(6).setPitAsMancala();
+		boardPits.get(13).setPitAsMancala();
+		playerA = true;
+		winnerString = "";
+		gameOver = false;
+	}
+
+	/* 
+	 * @see mancala.services.IStrategyGame#getGameBoard()
+	 * To get the count of stones in each pit on the game board, status of the game and the winner string at any point
+	 */
+	@Override
+	public GameBoard getGameBoard() {
+		ArrayList<Integer> countStonesBoardPits = new ArrayList<Integer>();
+		for(int i = 0; i < boardPits.size(); i++) 
+			countStonesBoardPits.add(boardPits.get(i).getCountOfStones());
+		GameBoard gameBoard = new GameBoard(countStonesBoardPits, gameOver, winnerString);
+		return gameBoard;
+	}
+	
+	
 }

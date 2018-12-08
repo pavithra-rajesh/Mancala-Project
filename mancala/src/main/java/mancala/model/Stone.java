@@ -1,7 +1,7 @@
 /**
  * 
  */
-package mancala.models;
+package mancala.model;
 
 /**
  * @author "Pavithra"
