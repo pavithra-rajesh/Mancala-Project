@@ -3,6 +3,7 @@ package com.mancala.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,6 +12,7 @@ import com.mancala.service.IStrategyGame;
 import com.mancala.transferObject.GameBoard;
 
 @RestController
+@Controller
 public class GameController {
 
 	@Autowired

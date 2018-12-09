@@ -3,6 +3,8 @@ package com.mancala.service;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
+import org.springframework.stereotype.Service;
+
 import com.mancala.model.BoardPit;
 import com.mancala.transferObject.GameBoard;
 
@@ -10,6 +12,7 @@ import com.mancala.transferObject.GameBoard;
  * @author "Pavithra"
  *
  */
+@Service
 public class MancalaGame implements IStrategyGame{
 
 	private boolean playerA;
