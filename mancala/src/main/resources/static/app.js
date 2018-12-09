@@ -67,11 +67,13 @@ function performMove(boardPitID) {
 }
 
 function drawGameBoard(message) {
-    $("#gameStatus").text(message.gameStatus);
-    $("#winner").text(message.winner);
-    piles = message.piles;
+    if(message.isGameOver)
+        $("#gameStatus").text("Game Over");
+    $("#winner").text(message.winnerString);
+
+    boardPitsStones = message.boardPitsStones;
     for (i=0; i<14; i++) {
-    	$("#"+i).text(piles[i]);
+    	$("#"+i).text(boardPitsStones[i]);
     }
 }
 

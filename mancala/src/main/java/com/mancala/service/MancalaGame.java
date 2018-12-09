@@ -286,18 +286,20 @@ public class MancalaGame implements IStrategyGame{
 	@Override
 	public void startNewGame() {
 		boardPits = new LinkedList<BoardPit>();
-		boolean isMancala = false;
+
 		for(int i = 0; i < 14 ; i++) {
-			if( i != 6)
-				isMancala = true;
-			else if (i != 13)
-				isMancala = true;
+			if( i == 6 || i == 13) {
+				boardPits.add(new BoardPit(0));
+			}
 			// To keep the Mancalas empty
-			if (!isMancala)
+			else {
 				boardPits.add(new BoardPit(NUM_STONES_IN_PIT));
+			}
 		}
+
 		boardPits.get(6).setPitAsMancala();
 		boardPits.get(13).setPitAsMancala();
+		
 		playerA = true;
 		winnerString = "";
 		gameOver = false;
@@ -313,7 +315,7 @@ public class MancalaGame implements IStrategyGame{
 		for(int i = 0; i < boardPits.size(); i++) 
 			countStonesBoardPits.add(boardPits.get(i).getCountOfStones());
 		GameBoard gameBoard = new GameBoard(countStonesBoardPits, gameOver, winnerString);
-		System.out.println(gameBoard.toString());
+
 		return gameBoard;
 	}
 	

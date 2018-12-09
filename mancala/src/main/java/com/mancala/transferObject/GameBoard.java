@@ -1,7 +1,6 @@
 package com.mancala.transferObject;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 /**
  * @author "Pavithra"
@@ -9,13 +8,13 @@ import java.util.Iterator;
  */
 public class GameBoard {
 	
-	private ArrayList<Integer> boardPits;
+	private ArrayList<Integer> boardPitsStones;
 	private boolean isGameOver;
 	private String winnerString;
 	
 	public GameBoard(ArrayList<Integer> countStonesBoardPits, boolean gameOver, String winnerStr)
 	{
-		boardPits = countStonesBoardPits;
+		boardPitsStones = countStonesBoardPits;
 		isGameOver = gameOver;
 		winnerString = winnerStr;
 	}
@@ -23,14 +22,14 @@ public class GameBoard {
 	/**
 	 * @return the boardPits
 	 */
-	public ArrayList<Integer> getBoardPits() {
-		return boardPits;
+	public ArrayList<Integer> getBoardPitsStones() {
+		return boardPitsStones;
 	}
 	/**
 	 * @param boardPits the boardPits to set
 	 */
-	public void setBoardPits(ArrayList<Integer> boardPits) {
-		this.boardPits = boardPits;
+	public void setBoardPitsStones(ArrayList<Integer> boardPitsStones) {
+		this.boardPitsStones = boardPitsStones;
 	}
 	/**
 	 * @return the isGameOver
@@ -57,13 +56,4 @@ public class GameBoard {
 		this.winnerString = winnerString;
 	}
 	
-	public String toString() {
-		String output="";
-		Iterator itr = boardPits.iterator();
-		for(;itr.hasNext();) {
-			output=(String)itr.next();
-		}
-		return output;
-	}
-
 }
