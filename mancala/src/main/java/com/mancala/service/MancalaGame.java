@@ -42,16 +42,19 @@ public class MancalaGame implements IStrategyGame{
 		if(validateSelectedPit(selectedPit)) {
 			isLastStoneInMancala = false;
 			int successivePit = selectedPit + 1;
+			
 			int stonesInSelectedPit = boardPits.get(selectedPit).getCountOfStones();
 			
 			for(int i = 0 ; i < stonesInSelectedPit ; i++) {
+				
+				if(successivePit > 13) 
+					successivePit = 0;
 				
 				//If playerA is active(playerA true) and successive pit is his Mancala (pit 6), then add a stone to pit 6.
 				if(playerA && successivePit == 6) {
 					boardPits.get(successivePit).PushInStone();
 					//Check if that is the last stone of current pit, then set isLastStoneInMancala to true.
-					if(boardPits.get(selectedPit).IsStoneLast())
-						isLastStoneInMancala = true;
+					isLastStoneInMancala = boardPits.get(selectedPit).IsStoneLast();
 					boardPits.get(selectedPit).popOutStone();
 				}
 				
@@ -59,8 +62,7 @@ public class MancalaGame implements IStrategyGame{
 				else if(!playerA && successivePit == 13) {
 					boardPits.get(successivePit).PushInStone();
 					//Check if that is the last stone of current pit, then set isLastStoneInMancala to true.
-					if(boardPits.get(selectedPit).IsStoneLast())
-						isLastStoneInMancala = true;
+					isLastStoneInMancala = boardPits.get(selectedPit).IsStoneLast();
 					boardPits.get(selectedPit).popOutStone();
 				}
 				
@@ -90,8 +92,9 @@ public class MancalaGame implements IStrategyGame{
 					boardPits.get(successivePit).PushInStone();
 					boardPits.get(selectedPit).popOutStone();
 					//After adding the stone in the pit if that is the only stone, then set it as last stone.
-					if((boardPits.get(successivePit)).getCountOfStones() == 1)
+					if((boardPits.get(successivePit)).getCountOfStones() == 1) {
 						boardPits.get(successivePit).peek().setIsLastStone(true);
+					}
 				}
 				successivePit++;
 			}
@@ -111,24 +114,12 @@ public class MancalaGame implements IStrategyGame{
 	 */
 	public void playerTurnChange() {
 		if(!isLastStoneInMancala) {
-			if(playerA) {
-				playerA = false;
-				//FIXME: Send a message to UI indicating that it is playerB's turn
-			}
-			else {
-				playerA = true;
-				//FIXME: Send a message to UI indicating that it is playerA's turn
-			}
-		}	
-		else
-		{
-			if(playerA) {
-				//FIXME: Send a message to UI indicating that the playerA gets a free turn
-			}
-			else {
-				//FIXME: Send a message to UI indicating that the playerB gets a free turn
-			}
-		}	
+				//playerA's turn
+				if(playerA)
+					playerA = false;
+				else
+					playerA = true;
+		}
 	}
 	
 	/**
@@ -314,8 +305,7 @@ public class MancalaGame implements IStrategyGame{
 		ArrayList<Integer> countStonesBoardPits = new ArrayList<Integer>();
 		for(int i = 0; i < boardPits.size(); i++) 
 			countStonesBoardPits.add(boardPits.get(i).getCountOfStones());
-		GameBoard gameBoard = new GameBoard(countStonesBoardPits, gameOver, winnerString);
-
+		GameBoard gameBoard = new GameBoard(countStonesBoardPits, playerA, gameOver, winnerString);
 		return gameBoard;
 	}
 	

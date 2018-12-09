@@ -67,9 +67,14 @@ function performMove(boardPitID) {
 }
 
 function drawGameBoard(message) {
-    if(message.isGameOver)
+    if(message.gameOver){
         $("#gameStatus").text("Game Over");
-    $("#winner").text(message.winnerString);
+        $("#winner").text(message.winnerString);
+    }
+    else if (message.turnPlayerA)
+        $("#gameStatus").text("Player A's turn");
+    else if(!message.turnPlayerA)
+        $("#gameStatus").text("Player B's turn");
 
     boardPitsStones = message.boardPitsStones;
     for (i=0; i<14; i++) {

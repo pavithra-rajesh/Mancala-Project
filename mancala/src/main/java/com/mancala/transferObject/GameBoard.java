@@ -9,14 +9,16 @@ import java.util.ArrayList;
 public class GameBoard {
 	
 	private ArrayList<Integer> boardPitsStones;
-	private boolean isGameOver;
+	private boolean gameOver;
 	private String winnerString;
-	
-	public GameBoard(ArrayList<Integer> countStonesBoardPits, boolean gameOver, String winnerStr)
+	private boolean turnPlayerA;
+
+	public GameBoard(ArrayList<Integer> countStonesBoardPits, boolean isTurnPlayerA, boolean isGameOver, String winnerStr)
 	{
-		boardPitsStones = countStonesBoardPits;
-		isGameOver = gameOver;
-		winnerString = winnerStr;
+		this.boardPitsStones = countStonesBoardPits;
+		this.gameOver = gameOver;
+		this.winnerString = winnerStr;
+		this.turnPlayerA = isTurnPlayerA;
 	}
 	
 	/**
@@ -35,13 +37,13 @@ public class GameBoard {
 	 * @return the isGameOver
 	 */
 	public boolean isGameOver() {
-		return isGameOver;
+		return gameOver;
 	}
 	/**
 	 * @param isGameOver the isGameOver to set
 	 */
 	public void setGameOver(boolean isGameOver) {
-		this.isGameOver = isGameOver;
+		this.gameOver = isGameOver;
 	}
 	/**
 	 * @return the winnerString
@@ -54,6 +56,20 @@ public class GameBoard {
 	 */
 	public void setWinnerString(String winnerString) {
 		this.winnerString = winnerString;
+	}
+	
+	/**
+	 * @return the isTurnPlayerA
+	 */
+	public boolean isTurnPlayerA() {
+		return turnPlayerA;
+	}
+
+	/**
+	 * @param isTurnPlayerA the isTurnPlayerA to set
+	 */
+	public void setTurnPlayerA(boolean isTurnPlayerA) {
+		this.turnPlayerA = isTurnPlayerA;
 	}
 	
 }
