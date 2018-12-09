@@ -11,27 +11,17 @@ import org.springframework.web.bind.annotation.RestController;
 import com.mancala.service.IStrategyGame;
 import com.mancala.transferObject.GameBoard;
 
-@RestController
 @Controller
 public class GameController {
 
 	@Autowired
 	private IStrategyGame mancalaGame;
 	
-	@Autowired
-	private GameBoard gameBoard;
-	
-	@RequestMapping("/error")
-	public String getError() {
-		return "Error";
-	}
-	
 	@MessageMapping(value="/startGame")
 	@SendTo("/topic/game")
 	public GameBoard startGame() {
-		System.out.println("Hi");
 		mancalaGame.startNewGame();
-		gameBoard = mancalaGame.getGameBoard();
+		GameBoard gameBoard = mancalaGame.getGameBoard();
 		return gameBoard;
 	}
 	
