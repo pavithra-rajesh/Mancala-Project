@@ -18,7 +18,7 @@ public class MancalaGame implements IStrategyGame{
 	private boolean playerA;
 	private boolean isLastStoneInMancala;
 	private LinkedList<BoardPit> boardPits;
-	private final int NUM_STONES_IN_PIT = 6;
+	private final int NUM_STONES_IN_PIT = 1;
 	private String winnerString;
 	private boolean gameOver;
 	
@@ -81,9 +81,10 @@ public class MancalaGame implements IStrategyGame{
 					pushInToMancala();
 					boardPits.get(selectedPit).popOutStone();
 					//Capture the opponent's stones from the paired pit.
-					for(int j = 0 ; j < getPairedPit(selectedPit).getCountOfStones() ; j++) {
+					
+					for(int j = 0 ; j < getPairedPit(successivePit).getCountOfStones() ; j++) {
 						pushInToMancala();
-						getPairedPit(selectedPit).popOutStone();
+						getPairedPit(successivePit).popOutStone();
 					}
 				}
 				

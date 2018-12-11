@@ -1,41 +1,22 @@
 var stompClient = null;
 
-function createPitsTopRow(){
-    var docFrag = document.createDocumentFragment();
-    for (var i=0; i < 5 ; i++){
-     var elem = document.createElement('input');
-     elem.type = 'button';
-     if(i==6)
-        elem.className='btn btn-custom';
-     else
-     {
-        elem.className='btn btn-success';
-        elem.onclick=performMove(i);
-     } 
-     docFrag.appendChild(elem);
-}
-document.body.getElementsByTagName("div")[10].appendChild(docFrag);
-}
+function createPits(){
+    var button;
+    for (var i=5; i >= 0 ; i--){
+        button='<button id="'+i+'" class="btn btn-success custom" onclick="performMove('+i+')">'+0+'</button>';
+        $("#topRow").append(button);
+    }
 
-function createPitsBottomRow(){
-    var docFrag = document.createDocumentFragment();
-    for (var i=7; i < 13 ; i++){
-     var elem = document.createElement('input');
-     elem.type = 'button';
-     if(i==13)
-        elem.className='btn btn-custom';
-     else{
-        elem.className='btn btn-success';
-        elem.onclick=performMove(i);
-     }  
-     docFrag.appendChild(elem);
-}
-document.body.appendChild(docFrag);
+    for (var j=7; j <= 12 ; j++){
+        button='<button id="'+j+'" class="btn btn-warning custom" onclick="performMove('+j+')">'+0+'</button>';
+        $("#bottomRow").append(button);
+    }
 }
 
 function setConnected(connected) {
     $("#connect").prop("disabled", connected);
     $("#disconnect").prop("disabled", !connected);
+    $("#start").prop("disabled", !connected);
 }
 
 function connect() {
@@ -60,6 +41,7 @@ function disconnect() {
 
 function startGame() {
     stompClient.send("/app/startGame", {}, {});
+
 }
 
 function performMove(boardPitID) {
@@ -68,11 +50,12 @@ function performMove(boardPitID) {
 
 function drawGameBoard(message) {
     if(message.gameOver){
-        $("#gameStatus").text("Game Over");
+        $("#gameStatus").text("Game Over. ");
         $("#winner").text(message.winnerString);
     }
-    else if (message.turnPlayerA)
+    else if (message.turnPlayerA){
         $("#gameStatus").text("Player A's turn");
+    }
     else if(!message.turnPlayerA)
         $("#gameStatus").text("Player B's turn");
 

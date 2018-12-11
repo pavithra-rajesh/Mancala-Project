@@ -16,7 +16,7 @@ public class GameBoard {
 	public GameBoard(ArrayList<Integer> countStonesBoardPits, boolean isTurnPlayerA, boolean isGameOver, String winnerStr)
 	{
 		this.boardPitsStones = countStonesBoardPits;
-		this.gameOver = gameOver;
+		this.gameOver = isGameOver;
 		this.winnerString = winnerStr;
 		this.turnPlayerA = isTurnPlayerA;
 	}
@@ -36,7 +36,7 @@ public class GameBoard {
 	/**
 	 * @return the isGameOver
 	 */
-	public boolean isGameOver() {
+	public boolean getGameOver() {
 		return gameOver;
 	}
 	/**
