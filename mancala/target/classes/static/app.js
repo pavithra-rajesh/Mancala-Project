@@ -13,10 +13,16 @@ function createPits(){
     }
 }
 
+/*
+ 
+*/
 function setConnected(connected) {
     $("#connect").prop("disabled", connected);
     $("#disconnect").prop("disabled", !connected);
-    $("#start").prop("disabled", !connected);
+    $("#defaultStones").prop("disabled",!connected);
+    if(''!=$("#defaultStones").value) {
+        $("#start").prop("disabled", !connected);
+    }
 }
 
 function connect() {
@@ -40,7 +46,8 @@ function disconnect() {
 }
 
 function startGame() {
-    stompClient.send("/app/startGame", {}, {});
+    var defaultStones = document.getElementById("defaultStones").value;
+    stompClient.send("/app/startGame", {}, defaultStones);
 
 }
 

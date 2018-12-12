@@ -18,7 +18,6 @@ public class MancalaGame implements IStrategyGame{
 	private boolean playerA;
 	private boolean isLastStoneInMancala;
 	private LinkedList<BoardPit> boardPits;
-	private final int NUM_STONES_IN_PIT = 1;
 	private String winnerString;
 	private boolean gameOver;
 	
@@ -81,8 +80,8 @@ public class MancalaGame implements IStrategyGame{
 					pushInToMancala();
 					boardPits.get(selectedPit).popOutStone();
 					//Capture the opponent's stones from the paired pit.
-					
-					for(int j = 0 ; j < getPairedPit(successivePit).getCountOfStones() ; j++) {
+					int stonesInPairedPit = getPairedPit(successivePit).getCountOfStones();
+					for(int j = 0 ; j < stonesInPairedPit ; j++) {
 						pushInToMancala();
 						getPairedPit(successivePit).popOutStone();
 					}
@@ -276,7 +275,8 @@ public class MancalaGame implements IStrategyGame{
 	 * Empty winner string
 	 */
 	@Override
-	public void startNewGame() {
+	public void startNewGame(int initialStoneCount) {
+		System.out.println("initial is"+initialStoneCount);
 		boardPits = new LinkedList<BoardPit>();
 
 		for(int i = 0; i < 14 ; i++) {
@@ -285,7 +285,7 @@ public class MancalaGame implements IStrategyGame{
 			}
 			// To keep the Mancalas empty
 			else {
-				boardPits.add(new BoardPit(NUM_STONES_IN_PIT));
+				boardPits.add(new BoardPit(initialStoneCount));
 			}
 		}
 

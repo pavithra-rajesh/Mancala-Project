@@ -16,7 +16,7 @@ import com.mancala.transferObject.GameBoard;
 public interface IStrategyGame {
 	
 	//Start a new game
-	public void startNewGame();
+	public void startNewGame(int initialStoneCount);
 	
 	//returnGameBoardObject
 	public GameBoard getGameBoard();

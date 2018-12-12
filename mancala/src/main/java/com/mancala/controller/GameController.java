@@ -17,8 +17,8 @@ public class GameController {
 	
 	@MessageMapping(value="/startGame")
 	@SendTo("/topic/game")
-	public GameBoard startGame() {
-		mancalaGame.startNewGame();
+	public GameBoard startGame(@RequestBody int initialStoneCount) {
+		mancalaGame.startNewGame(initialStoneCount);
 		GameBoard gameBoard = mancalaGame.getGameBoard();
 		return gameBoard;
 	}

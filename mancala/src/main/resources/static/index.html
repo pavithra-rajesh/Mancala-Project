@@ -16,10 +16,7 @@
     <br/>
     <div class="col-md-12"><h1 style="text-align:center;"><b> MANCALA </b></center></div>
 	<div id="main-content" class="container">
-        <br/>
-        <br/>
-        <br/>
-        <br/>
+        <div>&nbsp;</div>
 		<div class="row row-centered">
 			<div class="col-md-12">
 				<form class="form-inline">
@@ -36,15 +33,14 @@
 				<form class="form-inline">
 					<div class="form-group">
                         <br/>
-                        <button id="start" class="btn btn-default" type="submit" disabled="disabled">Start New Game</button>
+                        <label>No. of Stones in pit:</label>&nbsp;<input disabled type="text" value="6" style="width: 25px" title="Enter number of Mancala Stones" id="defaultStones" onblur="if(this.value==''){this.value='6'}">
+                        <button id="start" class="btn btn-default" type="submit" disabled="disabled">Start New Game</button><br>
+                        <label id="noStones" style="visibility:hidden">Please enter default number of stones</label>
 					</div>
 				</form>
 			</div>
         </div>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
+        <div>&nbsp;</div>
 		<div class="row">
 		<div class="row row-centered">
 			<span id="gameStatus"></span> <span id="winner"></span>
