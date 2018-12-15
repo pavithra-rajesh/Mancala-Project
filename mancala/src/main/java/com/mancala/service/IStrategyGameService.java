@@ -13,7 +13,7 @@ import com.mancala.transferObject.GameBoard;
  * Consists of methods that can be implemented in different ways based on the game implementing it
  */
 @Service
-public interface IStrategyGame {
+public interface IStrategyGameService {
 	
 	//Start a new game
 	public void startNewGame(int initialStoneCount);

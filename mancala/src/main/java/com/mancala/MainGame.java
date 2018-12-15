@@ -7,7 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @EnableAutoConfiguration
-@ComponentScan({"com.mancala.service.IStrategyGame"})
+@ComponentScan({"com.mancala.service.IStrategyGameService"})
 @ComponentScan({"com.mancala.controller.GameController"})
 @ComponentScan({"com.mancala.model.BoardPit"})
 public class MainGame {

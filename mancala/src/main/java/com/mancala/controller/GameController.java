@@ -6,14 +6,14 @@ import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import com.mancala.service.IStrategyGame;
+import com.mancala.service.IStrategyGameService;
 import com.mancala.transferObject.GameBoard;
 
 @Controller
 public class GameController {
 
 	@Autowired
-	private IStrategyGame mancalaGame;
+	private IStrategyGameService mancalaGame;
 	
 	@MessageMapping(value="/startGame")
 	@SendTo("/topic/game")

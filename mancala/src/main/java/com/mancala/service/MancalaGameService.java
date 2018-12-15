@@ -13,7 +13,7 @@ import com.mancala.transferObject.GameBoard;
  *
  */
 @Service
-public class MancalaGame implements IStrategyGame{
+public class MancalaGameService implements IStrategyGameService{
 
 	private boolean playerA;
 	private boolean isLastStoneInMancala;
@@ -276,7 +276,6 @@ public class MancalaGame implements IStrategyGame{
 	 */
 	@Override
 	public void startNewGame(int initialStoneCount) {
-		System.out.println("initial is"+initialStoneCount);
 		boardPits = new LinkedList<BoardPit>();
 
 		for(int i = 0; i < 14 ; i++) {
@@ -295,6 +294,34 @@ public class MancalaGame implements IStrategyGame{
 		playerA = true;
 		winnerString = "";
 		gameOver = false;
+	}
+
+	/**
+	 * @return the playerA
+	 */
+	public boolean isPlayerA() {
+		return playerA;
+	}
+
+	/**
+	 * @param playerA the playerA to set
+	 */
+	public void setPlayerA(boolean playerA) {
+		this.playerA = playerA;
+	}
+
+	/**
+	 * @return the boardPits
+	 */
+	public LinkedList<BoardPit> getBoardPits() {
+		return boardPits;
+	}
+
+	/**
+	 * @param boardPits the boardPits to set
+	 */
+	public void setBoardPits(LinkedList<BoardPit> boardPits) {
+		this.boardPits = boardPits;
 	}
 
 	/* 
