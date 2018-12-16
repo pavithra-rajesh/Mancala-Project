@@ -24,14 +24,10 @@ import com.mancala.transferObject.GameBoard;
  * @author "Pavithra"
  *
  */
-/**
- * @author "Pavithra"
- *
- */
 public class MancalaServiceTest extends AbstractTest {
 	
 	private final Integer INITIAL_STONES_COUNT = 6;
-	private final Integer SELECTED_PIT_A = 0;
+	private final Integer SELECTED_PIT_A = 2;
 	private final Integer SELECTED_PIT_B = 8;
 		
 	@Autowired
@@ -160,7 +156,7 @@ public class MancalaServiceTest extends AbstractTest {
 		assertEquals("Error in pit belongs to player logic", false, belongsToPlayer);
 		mancalaGameServiceTest.performMove(SELECTED_PIT_A);
 		belongsToPlayer = mancalaGameServiceTest.pitBelongsToPlayer(SELECTED_PIT_A);
-		assertEquals("Error in pit belongs to player logic", true, belongsToPlayer);
+		assertEquals("Error in pit belongs to player logic", false, belongsToPlayer);
 	}
 	
 	@Test

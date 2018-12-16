@@ -3,12 +3,12 @@ var stompClient = null;
 function createPits(){
     var button;
     for (var i=5; i >= 0 ; i--){
-        button='<button id="'+i+'" class="btn btn-success custom" onclick="performMove('+i+')">'+0+'</button>';
+        button='<button id="'+i+'" class="circle btn-success custom" onclick="performMove('+i+')">'+0+'</button>';
         $("#topRow").append(button);
     }
 
     for (var j=7; j <= 12 ; j++){
-        button='<button id="'+j+'" class="btn btn-warning custom" onclick="performMove('+j+')">'+0+'</button>';
+        button='<button id="'+j+'" class="circle btn-warning custom" onclick="performMove('+j+')">'+0+'</button>';
         $("#bottomRow").append(button);
     }
 }
