@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Mancala</title>
+<link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="/main.css" rel="stylesheet">
+<script src="/webjars/jquery/jquery.min.js"></script>
+<script src="/webjars/sockjs-client/sockjs.min.js"></script>
+<script src="/webjars/stomp-websocket/stomp.min.js"></script>
+<script src="/app.js"></script>
+</head>
+<body onload="javascript: createPits();">
+	<noscript><h2 style="color: #ff0000">Seems your browser doesn't support
+			Javascript! Websocket relies on Javascript being enabled. Please
+            enable Javascript and reload this page!</h2></noscript>
+    <br/>
+    <div class="col-md-12"><h1 style="text-align:center;"><b> MANCALA </b></center></div>
+	<div id="main-content" class="container">
+        <div>&nbsp;</div>
+		<div class="row row-centered">
+			<div class="col-md-12">
+				<form class="form-inline">
+					<div class="form-group">
+						<label for="connect">Connect to game server:</label>
+						<button id="connect" class="btn btn-default" type="submit">Connect</button>
+						<button id="disconnect" class="btn btn-default" type="submit" disabled="disabled">Disconnect</button>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12 col-centered">
+				<form class="form-inline">
+					<div class="form-group">
+                        <br/>
+                        <label>No. of Stones in pit:</label>&nbsp;<input disabled type="text" value="6" style="width: 25px" title="Enter number of Mancala Stones" id="defaultStones" onblur="if(this.value==''){this.value='6'}">
+                        <button id="start" class="btn btn-default" type="submit" disabled="disabled">Start New Game</button><br>
+                        <label id="noStones" style="visibility:hidden">Please enter default number of stones</label>
+					</div>
+				</form>
+			</div>
+        </div>
+        <div>&nbsp;</div>
+		<div class="row">
+		<div class="row row-centered">
+            <span id="gameStatus"></span> <span id="winner"></span>
+            <div>&nbsp</div>
+		</div>
+		<div class="row row-centered">
+			<div class="col-sm-1 col-centered">
+                <span>Player A</span>
+                <button id="6" class="btn btn-success btn-circle">0</button>
+			</div>
+			<div class="col-sm-4 col-centered">
+				<div class="row row-centered">
+					<div id="topRow" class="btn-group"></div>
+                </div>
+                <div>&nbsp;</div>
+				<div class="row row-centered">
+					<div id="bottomRow" class="btn-group"></div>
+				</div>
+			</div>
+			<div class="col-sm-1 col-centered">
+                <span>Player B</span>
+                <button id="13" class="btn btn-warning btn-circle">0</button>
+			</div>
+        </div>
+		</div>
+	</div>
+</body>
+</html>

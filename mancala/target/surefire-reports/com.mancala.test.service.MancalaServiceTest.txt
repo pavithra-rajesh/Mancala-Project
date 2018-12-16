@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.mancala.test.service.MancalaServiceTest
+-------------------------------------------------------------------------------
+Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.663 sec - in com.mancala.test.service.MancalaServiceTest

@@ -1,0 +1,33 @@
+h1 {
+    color: blue;
+    font-size: 100%;
+    text-align: center;
+}
+
+.row-centered {
+    text-align: center;
+}
+
+.col-centered {
+    display: inline-block;
+    float: none;
+    text-align: center;
+    margin-right: -4px;
+}
+
+.btn-circle {
+    width: 75px;
+    height: 150px;
+    text-align: center;
+    font-size: 18px;
+    line-height: 1.42;
+    border-radius: 15px;
+}
+
+.custom {
+    width: 50px;
+    height: 25px;
+    margin-right: 5px;
+    border-radius: 25%;
+}
+

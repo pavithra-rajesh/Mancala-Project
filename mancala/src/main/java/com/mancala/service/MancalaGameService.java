@@ -65,6 +65,11 @@ public class MancalaGameService implements IStrategyGameService{
 					boardPits.get(selectedPit).popOutStone();
 				}
 				
+				//If Player A is active and passes through opponent Mancala, skip dropping stones in to the pit
+				else if((playerA && successivePit == 13) || (!playerA && successivePit == 6)) {
+					//skip dropping stones in the pit
+				}
+				
 				/* Capturing logic : 4 conditions to be satisfied to capture opponent's stones
 				 * 1. If last stone of the selected pit 
 				 * 2. ends on an empty pit
